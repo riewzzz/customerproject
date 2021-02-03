@@ -10,12 +10,12 @@ mydb = mysql.connector.connect(
 mycursor = mydb.cursor()
 
 def createTable():
-    mycursor.execute("create table if not exists more_customers (id int auto_increment primary key, name varchar(255), address varchar(255))")
+    mycursor.execute("create table if not exists customers (id int auto_increment primary key, name varchar(255), address varchar(255))")
 
 createTable()
 
 def existsCustomers(name, address):
-    query = "select count(*) from more_customers where name='{}'".format(name)
+    query = "select count(*) from customers where name='{}'".format(name)
     print(query)
     mycursor.execute(query)
     
@@ -34,7 +34,7 @@ def existsCustomers(name, address):
     
     if count == 0:
         
-        sql = "insert into more_customers (name, address) values (%s, %s)"
+        sql = "insert into customers (name, address) values (%s, %s)"
         val = (name, address)
         mycursor.execute(sql, val)
         
